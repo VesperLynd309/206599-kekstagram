@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Веспер Линд](https://up.htmlacademy.ru/javascript/7/user/206599).
-* Наставник: `Варя Степанова`.
+* Наставник: [Варя Степанова](https://up.htmlacademy.ru/javascript/7/user/148462).
 
 ---
 
