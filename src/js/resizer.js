@@ -119,6 +119,42 @@
           this._resizeConstraint.side - this._ctx.lineWidth / 2,
           this._resizeConstraint.side - this._ctx.lineWidth / 2);
 
+      this._ctx.fillStyle = 'rgba(0,0,0,0.8)';
+      this._ctx.fillRect(
+        (-this._ctx.container.width / 2),
+        (-this._ctx.container.width / 2),
+        this._ctx.container.width,
+        this._ctx.container.width);
+
+      /* Попытка с несколькими блоками
+
+      this._ctx.fillStyle = 'rgba(0,0,0,0.8)';
+      this._ctx.fillRect(
+          (-this._container.width / 2),
+          (-this._container.height / 2), 
+          (this._container.width / 2 - (this._resizeConstraint.side - this._ctx.lineWidth / 2) / 2 - this._ctx.lineWidth),
+           this._container.height);
+      
+      this._ctx.fillRect(
+          (this._resizeConstraint.side - this._ctx.lineWidth / 2) / 2,
+          (-this._container.height / 2), 
+          (this._container.width / 2 - (this._resizeConstraint.side - this._ctx.lineWidth / 2) / 2),
+           this._container.height);
+
+      this._ctx.fillRect(
+          (-(this._resizeConstraint.side) / 2) - this._ctx.lineWidth + 1.19 ,
+          (-this._container.height / 2), 
+          (this._container.width / 2 - (this._resizeConstraint.side - this._ctx.lineWidth / 2) / 2),
+           this._container.height);
+*/
+
+      // Добавление размеров загружаемого изображения
+      this._ctx.fillStyle   = "#FFFFFF";
+      this._ctx.font = '20px sans-serif';
+      this._ctx.textAlign = "center";
+      this._ctx.textBaseline = "bottom";
+      this._ctx.fillText(this._image.naturalWidth + ' x ' + this._image.naturalHeight, 0, ( - (this._resizeConstraint.side + this._ctx.lineWidth * 2) / 2));  
+
       // Восстановление состояния канваса, которое было до вызова ctx.save
       // и последующего изменения системы координат. Нужно для того, чтобы
       // следующий кадр рисовался с привычной системой координат, где точка
