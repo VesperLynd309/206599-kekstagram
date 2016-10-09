@@ -88,16 +88,7 @@
       // canvas'a поэтому важно вовремя поменять их, если нужно начать отрисовку
       // чего-либо с другой обводкой.
 
-      // Толщина линии.
       var orangeLineWidth = 6;
-      this._ctx.lineWidth = orangeLineWidth;
-      // Цвет обводки.
-      this._ctx.strokeStyle = '#ffe753';
-      // Размер штрихов. Первый элемент массива задает длину штриха, второй
-      // расстояние между соседними штрихами.
-      this._ctx.setLineDash([15, 10]);
-      // Смещение первого штриха от начала линии.
-      this._ctx.lineDashOffset = 7;
 
       // Сохранение состояния канваса.
       this._ctx.save();
@@ -127,9 +118,13 @@
 
       // Создание полупрозрачного контура вокруг картинки.
       this._ctx.lineWidth = imageOutline;
+
       this._ctx.strokeStyle = 'rgba(0,0,0,0.8)';
+
       this._ctx.setLineDash([imageOutline, 0]);
+
       this._ctx.lineDashOffset = 0;
+
       this._ctx.strokeRect(
         -coordinateOutline,
         -coordinateOutline,
@@ -142,6 +137,30 @@
       this._ctx.textAlign = 'center';
       this._ctx.textBaseline = 'bottom';
       this._ctx.fillText(imageSize, 0, -this._resizeConstraint.side / 2 - orangeLineWidth * 2);
+
+      var сircleStart = 0;
+      var сircleOffset = 10;
+      var coordinateStart = this._resizeConstraint.side / 2;
+
+      do {
+        this._ctx.beginPath();
+        this._ctx.fillStyle = 'yellow';
+        this._ctx.arc(-coordinateStart - orangeLineWidth / 2 + сircleStart, -coordinateStart - orangeLineWidth / 2, 3, 0, 2 * Math.PI, true);
+        this._ctx.arc(-coordinateStart - orangeLineWidth / 2, -coordinateStart - orangeLineWidth / 2 + сircleStart, 3, 0, 2 * Math.PI, true);
+        this._ctx.fill();
+        сircleStart += сircleOffset;
+      }
+      while (сircleStart + сircleOffset < this._resizeConstraint.side + orangeLineWidth);
+
+      do {
+        this._ctx.beginPath();
+        this._ctx.fillStyle = 'yellow';
+        this._ctx.arc(-3 * coordinateStart + сircleStart, coordinateStart - orangeLineWidth, 3, 0, 2 * Math.PI, true);
+        this._ctx.arc(coordinateStart - orangeLineWidth, -3 * coordinateStart + сircleStart, 3, 0, 2 * Math.PI, true);
+        this._ctx.fill();
+        сircleStart += сircleOffset;
+      }
+      while (сircleStart + сircleOffset < 2 * this._resizeConstraint.side + orangeLineWidth / 2);
 
       // Восстановление состояния канваса, которое было до вызова ctx.save
       // и последующего изменения системы координат. Нужно для того, чтобы
