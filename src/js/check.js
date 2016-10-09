@@ -17,7 +17,7 @@ function getMessage(a, b) {
       } return ('Количество красных точек во всех строчках изображения: ' + amountOfRedPoints);
    } else if (typeof a === 'object' && typeof b === 'object') {
      var artifactsSquare = 0; 
-     for ( i = 0, j = 0; i < a.length j < b.length; i++, j++) {
+     for ( i = 0, var j = 0; i < a.length j < b.length; i++, j++) {
         artifactsSquare += a[i] * b[j];
       } return ('Общая площадь артефактов сжатия: ' + artifactsSquare + ' пикселей');
    } else {
