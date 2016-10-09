@@ -123,7 +123,7 @@
       // Переменные для вычислений.
       var imageOutline = this._container.width - this._resizeConstraint.side;
       var imageSize = this._image.naturalWidth + ' x ' + this._image.naturalHeight;
-      var coordinateOutline = this._container.width / 2 - orangeLineWidth;
+      var coordinateOutline = this._container.width / 2 + orangeLineWidth;
 
       // Создание полупрозрачного контура вокруг картинки.
       this._ctx.lineWidth = imageOutline;
@@ -141,7 +141,7 @@
       this._ctx.font = '20px sans-serif';
       this._ctx.textAlign = 'center';
       this._ctx.textBaseline = 'bottom';
-      this._ctx.fillText(imageSize, 0, -this._resizeConstraint.side / 2 - orangeLineWidth);
+      this._ctx.fillText(imageSize, 0, -this._resizeConstraint.side / 2 - orangeLineWidth * 2);
 
       // Восстановление состояния канваса, которое было до вызова ctx.save
       // и последующего изменения системы координат. Нужно для того, чтобы
