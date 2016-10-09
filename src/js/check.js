@@ -18,7 +18,7 @@ function getMessage(a, b) {
    } else if (typeof a === 'object' && typeof b === 'object') {
      var artifactsSquare = 0; 
      var j;
-     for ( i = 0, j = 0; i < a.length j < b.length; i++, j++) {
+     for ( i = 0, j = 0; i < a.length && j < b.length; i++, j++) {
         artifactsSquare += a[i] * b[j];
       } return ('Общая площадь артефактов сжатия: ' + artifactsSquare + ' пикселей');
    } else {
