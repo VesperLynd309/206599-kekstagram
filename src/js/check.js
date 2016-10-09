@@ -1,6 +1,6 @@
 'use strict';
 
-function getMessage(a, b) { // eslint-disable-line no-use-before-define
+function getMessage(a, b) { // eslint-disable-line no-unused-vars
   if (typeof a === 'boolean') {
     if (a === true) {
       return ('Переданное GIF-изображение анимировано и содержит ' + b + ' кадров');
