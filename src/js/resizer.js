@@ -89,7 +89,8 @@
       // чего-либо с другой обводкой.
 
       // Толщина линии.
-      this._ctx.lineWidth = 6;
+      var orangeLineWidth = 6;
+      this._ctx.lineWidth = orangeLineWidth;
       // Цвет обводки.
       this._ctx.strokeStyle = '#ffe753';
       // Размер штрихов. Первый элемент массива задает длину штриха, второй
@@ -122,29 +123,25 @@
       // Переменные для вычислений.
       var imageOutline = this._container.width - this._resizeConstraint.side;
       var imageSize = this._image.naturalWidth + ' x ' + this._image.naturalHeight;
+      var coordinateOutline = this._container.width / 2 - orangeLineWidth;
 
       // Создание полупрозрачного контура вокруг картинки.
-
       this._ctx.lineWidth = imageOutline;
-
       this._ctx.strokeStyle = 'rgba(0,0,0,0.8)';
-
       this._ctx.setLineDash([imageOutline, 0]);
-
       this._ctx.lineDashOffset = 0;
-
       this._ctx.strokeRect(
-        (-this._container.width / 2 - 6),
-        (-this._container.width / 2 - 6),
-        this._container.width + 3,
-        this._container.width + 3);
+        -coordinateOutline,
+        -coordinateOutline,
+        this._container.width + orangeLineWidth / 2,
+        this._container.width + orangeLineWidth / 2);
 
       // Добавление размеров загружаемого изображения
-      this._ctx.fillStyle   = "#FFFFFF";
+      this._ctx.fillStyle  = '#FFFFFF';
       this._ctx.font = '20px sans-serif';
-      this._ctx.textAlign = "center";
-      this._ctx.textBaseline = "bottom";
-      this._ctx.fillText(imageSize, 0, - this._resizeConstraint.side / 2 - 6);
+      this._ctx.textAlign = 'center';
+      this._ctx.textBaseline = 'bottom';
+      this._ctx.fillText(imageSize, 0, -this._resizeConstraint.side / 2 - orangeLineWidth);
 
       // Восстановление состояния канваса, которое было до вызова ctx.save
       // и последующего изменения системы координат. Нужно для того, чтобы
