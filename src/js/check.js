@@ -13,14 +13,14 @@ function getMessage(a, b) {
   } else if (typeof a === 'object') {
     var amountOfRedPoints = 0;
     for ( var i = 0; i < a.length; i++) {
-     amountOfRedPoints += a[i];
-   } return ('Количество красных точек во всех строчках изображения: ' + amountOfRedPoints);
+      amountOfRedPoints += a[i];
+    } return ('Количество красных точек во всех строчках изображения: ' + amountOfRedPoints);
   } else if (typeof a === 'object' && typeof b === 'object') {
     var artifactsSquare = 0;
     var j;
     for ( i = 0, j = 0; i < a.length && j < b.length; i++, j++) {
-       artifactsSquare += a[i] * b[j];
-     } return ('Общая площадь артефактов сжатия: ' + artifactsSquare + ' пикселей');
+      artifactsSquare += a[i] * b[j];
+    } return ('Общая площадь артефактов сжатия: ' + artifactsSquare + ' пикселей');
   } else {
     return ('Переданы некорректные данные');
   }
