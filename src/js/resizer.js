@@ -137,7 +137,7 @@
         this._container.width + orangeLineWidth / 2);
 
       // Добавление размеров загружаемого изображения
-      this._ctx.fillStyle  = '#FFFFFF';
+      this._ctx.fillStyle = '#FFFFFF';
       this._ctx.font = '20px sans-serif';
       this._ctx.textAlign = 'center';
       this._ctx.textBaseline = 'bottom';
