@@ -126,10 +126,10 @@
       this._ctx.lineDashOffset = 0;
 
       this._ctx.strokeRect(
-        -coordinateOutline,
-        -coordinateOutline,
-        this._container.width + orangeLineWidth / 2,
-        this._container.width + orangeLineWidth / 2);
+        -coordinateOutline + orangeLineWidth,
+        -coordinateOutline + orangeLineWidth,
+        this._container.width - orangeLineWidth / 2,
+        this._container.width - orangeLineWidth / 2);
 
       // Добавление размеров загружаемого изображения
       this._ctx.fillStyle = '#FFFFFF';
@@ -137,30 +137,50 @@
       this._ctx.textAlign = 'center';
       this._ctx.textBaseline = 'bottom';
       this._ctx.fillText(imageSize, 0, -this._resizeConstraint.side / 2 - orangeLineWidth * 2);
-
-      var сircleStart = 0;
-      var сircleOffset = 10;
+ 
+      
       var coordinateStart = this._resizeConstraint.side / 2;
+      var frameStart = 0;
+      var distanceBetweenPoints = 28;
+      var frameWidth = 4;
 
-      do {
+      while ((frameStart + distanceBetweenPoints) < (this._resizeConstraint.side)) {
         this._ctx.beginPath();
         this._ctx.fillStyle = 'yellow';
-        this._ctx.arc(-coordinateStart - orangeLineWidth / 2 + сircleStart, -coordinateStart - orangeLineWidth / 2, 3, 0, 2 * Math.PI, true);
-        this._ctx.arc(-coordinateStart - orangeLineWidth / 2, -coordinateStart - orangeLineWidth / 2 + сircleStart, 3, 0, 2 * Math.PI, true);
+        this._ctx.moveTo(-coordinateStart + frameStart, -coordinateStart + distanceBetweenPoints / 2);
+        this._ctx.lineTo(-coordinateStart + distanceBetweenPoints / 2 + frameStart, -coordinateStart);
+        this._ctx.lineTo(-coordinateStart + distanceBetweenPoints +frameStart, -coordinateStart + distanceBetweenPoints / 2);
+        this._ctx.lineTo(-coordinateStart + distanceBetweenPoints+frameStart, -coordinateStart + distanceBetweenPoints / 2 + frameWidth);
+        this._ctx.lineTo(-coordinateStart + distanceBetweenPoints / 2 + frameStart, -coordinateStart + frameWidth);
+        this._ctx.lineTo(-coordinateStart + frameStart, -coordinateStart + distanceBetweenPoints / 2 + frameWidth);
         this._ctx.fill();
-        сircleStart += сircleOffset;
-      }
-      while (сircleStart + сircleOffset < this._resizeConstraint.side + orangeLineWidth);
+       
+        this._ctx.moveTo(-coordinateStart, -coordinateStart + distanceBetweenPoints / 2 + frameStart);
+        this._ctx.lineTo(-coordinateStart + distanceBetweenPoints / 2 - frameWidth, -coordinateStart + distanceBetweenPoints + frameStart);
+        this._ctx.lineTo(-coordinateStart, -coordinateStart + 1.5 * distanceBetweenPoints + frameStart);
+        this._ctx.lineTo(-coordinateStart + frameWidth, -coordinateStart + 1.5 * distanceBetweenPoints + frameStart);
+        this._ctx.lineTo(-coordinateStart + distanceBetweenPoints / 2, -coordinateStart + distanceBetweenPoints + frameStart);
+        this._ctx.lineTo(-coordinateStart + frameWidth, -coordinateStart + distanceBetweenPoints / 2 + frameStart);
+        this._ctx.fill();
+        
+        this._ctx.moveTo(-coordinateStart + frameStart, coordinateStart - distanceBetweenPoints / 2);
+        this._ctx.lineTo(-coordinateStart + frameStart, coordinateStart - distanceBetweenPoints / 2 + frameWidth);
+        this._ctx.lineTo(-coordinateStart + distanceBetweenPoints / 2 + frameStart, coordinateStart);
+        this._ctx.lineTo(-coordinateStart + distanceBetweenPoints + frameStart, coordinateStart - distanceBetweenPoints / 2 + frameWidth);
+        this._ctx.lineTo(-coordinateStart + distanceBetweenPoints + frameStart, coordinateStart - distanceBetweenPoints / 2);
+        this._ctx.lineTo(-coordinateStart + distanceBetweenPoints / 2 + frameStart, coordinateStart - frameWidth);
+        this._ctx.fill();
 
-      do {
-        this._ctx.beginPath();
-        this._ctx.fillStyle = 'yellow';
-        this._ctx.arc(-3 * coordinateStart + сircleStart, coordinateStart - orangeLineWidth, 3, 0, 2 * Math.PI, true);
-        this._ctx.arc(coordinateStart - orangeLineWidth, -3 * coordinateStart + сircleStart, 3, 0, 2 * Math.PI, true);
+        this._ctx.moveTo(coordinateStart, -coordinateStart + frameStart);
+        this._ctx.lineTo(coordinateStart - frameWidth, -coordinateStart + frameStart);
+        this._ctx.lineTo(coordinateStart - distanceBetweenPoints / 2, -coordinateStart + distanceBetweenPoints / 2 + frameStart);
+        this._ctx.lineTo(coordinateStart - frameWidth, -coordinateStart + distanceBetweenPoints + frameStart);
+        this._ctx.lineTo(coordinateStart, -coordinateStart + distanceBetweenPoints + frameStart);
+        this._ctx.lineTo(coordinateStart - distanceBetweenPoints / 2 + frameWidth, -coordinateStart + distanceBetweenPoints / 2 + frameStart);
         this._ctx.fill();
-        сircleStart += сircleOffset;
+
+        frameStart += distanceBetweenPoints;
       }
-      while (сircleStart + сircleOffset < 2 * this._resizeConstraint.side + orangeLineWidth / 2);
 
       // Восстановление состояния канваса, которое было до вызова ctx.save
       // и последующего изменения системы координат. Нужно для того, чтобы
