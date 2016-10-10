@@ -138,7 +138,6 @@
       this._ctx.textBaseline = 'bottom';
       this._ctx.fillText(imageSize, 0, -this._resizeConstraint.side / 2 - orangeLineWidth * 2);
  
-      
       var coordinateStart = this._resizeConstraint.side / 2;
       var frameStart = 0;
       var distanceBetweenPoints = 28;
@@ -149,12 +148,11 @@
         this._ctx.fillStyle = 'yellow';
         this._ctx.moveTo(-coordinateStart + frameStart, -coordinateStart + distanceBetweenPoints / 2);
         this._ctx.lineTo(-coordinateStart + distanceBetweenPoints / 2 + frameStart, -coordinateStart);
-        this._ctx.lineTo(-coordinateStart + distanceBetweenPoints +frameStart, -coordinateStart + distanceBetweenPoints / 2);
-        this._ctx.lineTo(-coordinateStart + distanceBetweenPoints+frameStart, -coordinateStart + distanceBetweenPoints / 2 + frameWidth);
+        this._ctx.lineTo(-coordinateStart + distanceBetweenPoints + frameStart, -coordinateStart + distanceBetweenPoints / 2);
+        this._ctx.lineTo(-coordinateStart + distanceBetweenPoints + frameStart, -coordinateStart + distanceBetweenPoints / 2 + frameWidth);
         this._ctx.lineTo(-coordinateStart + distanceBetweenPoints / 2 + frameStart, -coordinateStart + frameWidth);
         this._ctx.lineTo(-coordinateStart + frameStart, -coordinateStart + distanceBetweenPoints / 2 + frameWidth);
         this._ctx.fill();
-       
         this._ctx.moveTo(-coordinateStart, -coordinateStart + distanceBetweenPoints / 2 + frameStart);
         this._ctx.lineTo(-coordinateStart + distanceBetweenPoints / 2 - frameWidth, -coordinateStart + distanceBetweenPoints + frameStart);
         this._ctx.lineTo(-coordinateStart, -coordinateStart + 1.5 * distanceBetweenPoints + frameStart);
@@ -162,7 +160,6 @@
         this._ctx.lineTo(-coordinateStart + distanceBetweenPoints / 2, -coordinateStart + distanceBetweenPoints + frameStart);
         this._ctx.lineTo(-coordinateStart + frameWidth, -coordinateStart + distanceBetweenPoints / 2 + frameStart);
         this._ctx.fill();
-        
         this._ctx.moveTo(-coordinateStart + frameStart, coordinateStart - distanceBetweenPoints / 2);
         this._ctx.lineTo(-coordinateStart + frameStart, coordinateStart - distanceBetweenPoints / 2 + frameWidth);
         this._ctx.lineTo(-coordinateStart + distanceBetweenPoints / 2 + frameStart, coordinateStart);
@@ -170,7 +167,6 @@
         this._ctx.lineTo(-coordinateStart + distanceBetweenPoints + frameStart, coordinateStart - distanceBetweenPoints / 2);
         this._ctx.lineTo(-coordinateStart + distanceBetweenPoints / 2 + frameStart, coordinateStart - frameWidth);
         this._ctx.fill();
-
         this._ctx.moveTo(coordinateStart, -coordinateStart + frameStart);
         this._ctx.lineTo(coordinateStart - frameWidth, -coordinateStart + frameStart);
         this._ctx.lineTo(coordinateStart - distanceBetweenPoints / 2, -coordinateStart + distanceBetweenPoints / 2 + frameStart);
