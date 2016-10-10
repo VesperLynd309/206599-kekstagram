@@ -137,7 +137,8 @@
       this._ctx.textAlign = 'center';
       this._ctx.textBaseline = 'bottom';
       this._ctx.fillText(imageSize, 0, -this._resizeConstraint.side / 2 - orangeLineWidth * 2);
- 
+
+      //Переменные для вычисления координат.
       var coordinateStart = this._resizeConstraint.side / 2;
       var frameStart = 0;
       var distanceBetweenPoints = 28;
