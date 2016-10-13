@@ -67,14 +67,22 @@
     backgroundElement.style.backgroundImage = 'url(' + images[randomImageNumber] + ')';
   };
 
+  //Прлучение данных из формы.
+  var x = document.querySelector('#resize-x'); 
+  var y = document.querySelector("#resize-y"); 
+  var size = document.querySelector("#resize-size"); 
+
   /**
    * Проверяет, валидны ли данные, в форме кадрирования.
    * @return {boolean}
    */
   var resizeFormIsValid = function() {
-    return true;
+    x.max = currentResizer._image.naturalWidth;
+    y.max = currentResizer._image.naturalHeight;
+    size.max = currentResizer._image.naturalWidth - x;
   };
 
+resizeFormIsValid(x, y);
   /**
    * Форма загрузки изображения.
    * @type {HTMLFormElement}
@@ -264,3 +272,6 @@
   cleanupResizer();
   updateBackground();
 })();
+
+
+
