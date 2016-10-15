@@ -116,6 +116,25 @@
       var imageSize = this._image.naturalWidth + ' x ' + this._image.naturalHeight;
       var coordinateOutline = this._container.width / 2 + orangeLineWidth;
 
+      // Создание двух прямоугольников и вычитание оного из другого.
+      this._ctx.fillStyle = 'rgba(0,0,0,0.8)';
+
+      this._ctx.fillRect(
+        - this._container.width / 2,
+        - this._container.height / 2,
+        this._container.width,
+        this._container.height);
+
+ /    this._ctx.fillRect(
+        (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2,
+          (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2,
+          this._resizeConstraint.side - this._ctx.lineWidth / 2,
+          this._resizeConstraint.side - this._ctx.lineWidth / 2);
+
+      this._ctx.fill('evenodd');
+
+
+/*
       // Создание полупрозрачного контура вокруг картинки.
       this._ctx.lineWidth = imageOutline;
 
@@ -137,7 +156,7 @@
       this._ctx.textAlign = 'center';
       this._ctx.textBaseline = 'bottom';
       this._ctx.fillText(imageSize, 0, -this._resizeConstraint.side / 2 - orangeLineWidth * 2);
-
+*/
       //Переменные для вычисления координат.
       var coordinateStart = this._resizeConstraint.side / 2;
       var frameStart = 0;
