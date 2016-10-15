@@ -195,15 +195,18 @@
           x.value = currentResizer._image.naturalWidth / 4;
           y.value = currentResizer._image.naturalHeight / 4;
 
+          setSizeConstraint(size, x.value, y.value);
+
           //Пересчет "стороны" при изменении двух других полей.
           x.oninput = function() {
-            y.oninput = function() {
+            setSizeConstraint(size, x.value, y.value);
+            validateForm(x.value, y.value);
+          };
+
+          y.oninput = function() {
               setSizeConstraint(size, x.value, y.value);
               validateForm(x.value, y.value);
             };
-          };
-
-          setSizeConstraint(size, x.value, y.value); 
         };
 
         fileReader.readAsDataURL(element.files[0]);
