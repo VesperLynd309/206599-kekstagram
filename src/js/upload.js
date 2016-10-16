@@ -160,92 +160,61 @@
           resizeForm.classList.remove('invisible');
 
           hideMessage();
-          
-        // Проверка формы на соответствие введенных данных.
-        function valideteForm() {
 
-          // Получение значний из форм
-          function getValueX() {
-            var x = document.querySelector('#resize-x'); 
-            return x;
-          };
+          // Проверка правильности введенных значений
+          function valideteForm() {
+            var x = document.querySelector('#resize-x').value; 
+            var y = document.querySelector("#resize-y").value; 
+            var size = document.querySelector("#resize-size").value;
 
-          function getValueY() {
-            var y = document.querySelector("#resize-y"); 
-            return y;
-          };
+            // Деактивация кнопки
+            function disableButton() {
+              var formBatton = document.querySelector("#resize-fwd");
+              formBatton.setAttribute('disabled', 'disabled');
+            };
 
-          function getValueSize() {
-            var size = document.querySelector("#resize-size");
-            return size;
-          };
+            function activeBatton() {
+              var formBatton = document.querySelector("#resize-fwd");
+              formBatton.removeAttribute('disabled');
+            };
 
-          // Деактивация кнопки
-          function disableButton() {
-            var formBatton = document.querySelector("#resize-fwd");
-            formBatton.setAttribute('disabled', 'disabled');
-          };
+            if (x < 0 || x > currentResizer._image.naturalWidth) {
+              disableButton();
+            } else {
+              activeBatton();
+            };
 
-          // Проверка значений на соответствие
-          function checkValueХ() {
-            getValueX();
-            if (x < 0 || x > currentResizer._image.naturalWidth)
-              return false;
-          };
+            if (y < 0 || y > currentResizer._image.naturalHeight) {
+              disableButton();
+            } else {
+              activeBatton();
+            };
 
-          function checkValueY() {
-            getValueY();
-            if (y < 0 || y > currentResizer._image.naturalHeight)
-              return false;
-          };
-
-          function checkValueSize() {
-            getValueSize();
             var sizeValue = (Math.min(currentResizer._image.naturalWidth, currentResizer._image.naturalHeight) - Math.min(x, y));
-            if (size < 0 || size > sizeValue) 
-            return false;
+            if (size < 0 || size > sizeValue) {
+              disableButton();
+            } else {
+              activeBatton();
+            };
           };
 
-          // Получить значнние и проверить
-          getValueX();
-          checkValueX();
+          valideteForm();
 
-          getValueY();
-          checkValueY();
+          var x = document.querySelector('#resize-x'); 
+          var y = document.querySelector("#resize-y"); 
+          var size = document.querySelector("#resize-size");
 
-          getValueSize();
-          checkValueSize();
-
-          // Если значение false, деактивировать кнопку.
-          if (checkValueX() === false) {
-            disableButton();
-          };
-
-          if (checkValueY() === false) {
-            disableButton();
-          };
-
-          if (checkValueSize() === false) {
-            disableButton();
-          };
-        };
-
-        var x = document.querySelector('#resize-x'); 
-        var y = document.querySelector("#resize-y"); 
-        var size = document.querySelector("#resize-size");
-
-        //При каждом изменении значения, проверять форму
-        x.oninput = function() {
+          x.oninput = function() {
             valideteForm();
           };
 
-        y.oninput = function() {
+          y.oninput = function() {
             valideteForm();
-        };
+          };
 
-        size.oninput = function() {
+          size.oninput = function() {
             valideteForm();
-        };
+          };
         };
 
         fileReader.readAsDataURL(element.files[0]);
