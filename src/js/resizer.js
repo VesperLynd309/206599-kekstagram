@@ -112,16 +112,14 @@
           this._resizeConstraint.side - this._ctx.lineWidth / 2);
 
       // Переменные для вычислений.
-      var imageOutline = this._container.width - this._resizeConstraint.side;
       var imageSize = this._image.naturalWidth + ' x ' + this._image.naturalHeight;
-      var coordinateOutline = this._container.width / 2 + orangeLineWidth;
 
       // Создание двух прямоугольников и вычитание оного из другого.
       this._ctx.fillStyle = 'rgba(0,0,0,0.8)';
 
       this._ctx.rect(
-        - this._container.width / 2,
-        - this._container.height / 2,
+        -this._container.width / 2,
+        -this._container.height / 2,
         this._container.width,
         this._container.height);
 
