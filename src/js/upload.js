@@ -160,53 +160,92 @@
           resizeForm.classList.remove('invisible');
 
           hideMessage();
+          
+        // Проверка формы на соответствие введенных данных.
+        function valideteForm() {
 
-          //Получение данных из формы
-          var x = document.querySelector('#resize-x'); 
-          var y = document.querySelector("#resize-y"); 
-          var size = document.querySelector("#resize-size"); 
-
-          // Ограничения для ввода значений слева и сверху
-          x.min = 0;
-          x.max = currentResizer._image.naturalWidth;
-          y.min = 0;
-          y.max = currentResizer._image.naturalHeight;
-
-          //Расчет ограниченя стороны в зависимости от введенных "слева" и "сверху"
-         var setSizeConstraint = function(sizeField, xNumber, yNumber) {
-            sizeField.min = 0;
-            sizeField.max = Math.min(currentResizer._image.naturalWidth, currentResizer._image.naturalHeight) - Math.min(xNumber, yNumber);
-          }
-
-          //Деактивация кнопки, если значения "слева" и "сверху" выходят за рамки допустимых.
-          function validateForm(xNumber, yNumber) {
-            if (xNumber < 0) {
-              var formBatton = document.querySelector(".upload-form-controls-fwd"); 
-              formBatton.setAttribute('disabled', 'disabled');
-            } else if (yNumber < 0) { 
-              formBatton.setAttribute('disabled', 'disabled');
-            } else if (xNumber > currentResizer._image.naturalWidth) {
-              formBatton.setAttribute('disabled', 'disabled');
-            } else if (yNumber > currentResizer._image.naturalHeight) {
-              formBatton.setAttribute('disabled', 'disabled');
-            } else {}
+          // Получение значний из форм
+          function getValueX() {
+            var x = document.querySelector('#resize-x'); 
+            return x;
           };
 
-          x.value = currentResizer._image.naturalWidth / 4;
-          y.value = currentResizer._image.naturalHeight / 4;
-
-          setSizeConstraint(size, x.value, y.value);
-
-          //Пересчет "стороны" при изменении двух других полей.
-          x.oninput = function() {
-            setSizeConstraint(size, x.value, y.value);
-            validateForm(x.value, y.value);
+          function getValueY() {
+            var y = document.querySelector("#resize-y"); 
+            return y;
           };
 
-          y.oninput = function() {
-              setSizeConstraint(size, x.value, y.value);
-              validateForm(x.value, y.value);
-            };
+          function getValueSize() {
+            var size = document.querySelector("#resize-size");
+            return size;
+          };
+
+          // Деактивация кнопки
+          function disableButton() {
+            var formBatton = document.querySelector("#resize-fwd");
+            formBatton.setAttribute('disabled', 'disabled');
+          };
+
+          // Проверка значений на соответствие
+          function checkValueХ() {
+            getValueX();
+            if (x < 0 || x > currentResizer._image.naturalWidth)
+              return false;
+          };
+
+          function checkValueY() {
+            getValueY();
+            if (y < 0 || y > currentResizer._image.naturalHeight)
+              return false;
+          };
+
+          function checkValueSize() {
+            getValueSize();
+            var sizeValue = (Math.min(currentResizer._image.naturalWidth, currentResizer._image.naturalHeight) - Math.min(x, y));
+            if (size < 0 || size > sizeValue) 
+            return false;
+          };
+
+          // Получить значнние и проверить
+          getValueX();
+          checkValueX();
+
+          getValueY();
+          checkValueY();
+
+          getValueSize();
+          checkValueSize();
+
+          // Если значение false, деактивировать кнопку.
+          if (checkValueX() === false) {
+            disableButton();
+          };
+
+          if (checkValueY() === false) {
+            disableButton();
+          };
+
+          if (checkValueSize() === false) {
+            disableButton();
+          };
+        };
+
+        var x = document.querySelector('#resize-x'); 
+        var y = document.querySelector("#resize-y"); 
+        var size = document.querySelector("#resize-size");
+
+        //При каждом изменении значения, проверять форму
+        x.oninput = function() {
+            valideteForm();
+          };
+
+        y.oninput = function() {
+            valideteForm();
+        };
+
+        size.oninput = function() {
+            valideteForm();
+        };
         };
 
         fileReader.readAsDataURL(element.files[0]);
@@ -312,4 +351,3 @@
   cleanupResizer();
   updateBackground();
 })();
-
