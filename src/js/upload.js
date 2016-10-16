@@ -163,46 +163,46 @@
 
           // Проверка правильности введенных значений
           function valideteForm() {
-            var x = document.querySelector('#resize-x').value; 
-            var y = document.querySelector("#resize-y").value; 
-            var size = document.querySelector("#resize-size").value;
+            var x = document.querySelector('#resize-x').value;
+            var y = document.querySelector('#resize-y').value;
+            var size = document.querySelector('#resize-size').value;
 
             // Деактивация кнопки
             function disableButton() {
-              var formBatton = document.querySelector("#resize-fwd");
+              var formBatton = document.querySelector('#resize-fwd');
               formBatton.setAttribute('disabled', 'disabled');
-            };
+            }
 
             function activeBatton() {
-              var formBatton = document.querySelector("#resize-fwd");
+              var formBatton = document.querySelector('#resize-fwd');
               formBatton.removeAttribute('disabled');
-            };
+            }
 
             if (x < 0 || x > currentResizer._image.naturalWidth) {
               disableButton();
             } else {
               activeBatton();
-            };
+            }
 
             if (y < 0 || y > currentResizer._image.naturalHeight) {
               disableButton();
             } else {
               activeBatton();
-            };
+            }
 
             var sizeValue = (Math.min(currentResizer._image.naturalWidth, currentResizer._image.naturalHeight) - Math.min(x, y));
             if (size < 0 || size > sizeValue) {
               disableButton();
             } else {
               activeBatton();
-            };
-          };
+            }
+          }
 
           valideteForm();
 
-          var x = document.querySelector('#resize-x'); 
-          var y = document.querySelector("#resize-y"); 
-          var size = document.querySelector("#resize-size");
+          var x = document.querySelector('#resize-x');
+          var y = document.querySelector('#resize-y');
+          var size = document.querySelector('#resize-size');
 
           x.oninput = function() {
             valideteForm();
@@ -260,9 +260,9 @@
 
       resizeForm.classList.add('invisible');
       filterForm.classList.remove('invisible');
-    } 
+    }
   };
-  
+
   resizeFormIsValid();
   /**
    * Сброс формы фильтра. Показывает форму кадрирования.
