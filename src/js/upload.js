@@ -183,7 +183,7 @@
             var valueY = y.value;
             var valueSize = size.value;
 
-            if (typeof valueX != 'number' || typeof valueY != 'number' || typeof valueSize != 'number') {
+            if (typeof valueX !== 'number' || typeof valueY !== 'number' || typeof valueSize !== 'number') {
               disableButton();
             } else {
               activeButton();
@@ -208,12 +208,11 @@
               activeButton();
             }
           }
-          
           valideteForm();
 
           size.oninput = function() {
             valideteForm();
-          }; 
+          };
 
           y.oninput = function() {
             valideteForm();
