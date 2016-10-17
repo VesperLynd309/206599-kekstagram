@@ -160,6 +160,67 @@
           resizeForm.classList.remove('invisible');
 
           hideMessage();
+
+          var x = document.querySelector('#resize-x');
+          var y = document.querySelector('#resize-y');
+          var size = document.querySelector('#resize-size');
+          var formButton = document.querySelector('#resize-fwd');
+
+           // Деактивация кнопки
+          function disableButton() {
+            formButton.setAttribute('disabled', 'disabled');
+          }
+
+          // активация кнопки
+          function activeButton() {
+            formButton.removeAttribute('disabled');
+          }
+
+          // Проверка правильности введенных значений
+          function valideteForm() {
+
+            var valueX = x.value;
+            var valueY = y.value;
+            var valueSize = size.value;
+
+            if (typeof valueX !== 'number' || typeof valueY !== 'number' || typeof valueSize !== 'number') {
+              disableButton();
+            } else {
+              activeButton();
+            }
+
+            if ((valueX + valueSize) > currentResizer._image.naturalWidth || valueX < 0 ) {
+              disableButton();
+            } else {
+              activeButton();
+            }
+
+            if ((valueX + valueSize) > currentResizer._image.naturalHeight || valueY < 0) {
+              disableButton();
+            } else {
+              activeButton();
+            }
+
+            var sizeWidth = (Math.min(currentResizer._image.naturalWidth, currentResizer._image.naturalHeight) - Math.min(valueX, valueY));
+            if (valueSize > sizeWidth || valueSize < 0) {
+              disableButton();
+            } else {
+              activeButton();
+            }
+          }
+          valideteForm();
+
+          size.oninput = function() {
+            valideteForm();
+          };
+
+          y.oninput = function() {
+            valideteForm();
+          };
+
+          x.oninput = function() {
+            valideteForm();
+          };
         };
 
         fileReader.readAsDataURL(element.files[0]);
@@ -208,6 +269,7 @@
     }
   };
 
+  resizeFormIsValid();
   /**
    * Сброс формы фильтра. Показывает форму кадрирования.
    * @param {Event} evt
