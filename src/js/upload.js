@@ -179,30 +179,26 @@
           // Проверка правильности введенных значений
           function valideteForm() {
 
-            var valueX = x.value;
-            var valueY = y.value;
-            var valueSize = size.value;
-
-            if (typeof valueX !== 'number' || typeof valueY !== 'number' || typeof valueSize !== 'number') {
+            if (typeof x.value !== 'number' || typeof y.value !== 'number' || typeof size.value !== 'number') {
               disableButton();
             } else {
               activeButton();
             }
 
-            if ((valueX + valueSize) > currentResizer._image.naturalWidth || valueX < 0 ) {
+            if ((x.value + size.value) > currentResizer._image.naturalWidth || x.value < 0 ) {
               disableButton();
             } else {
               activeButton();
             }
 
-            if ((valueX + valueSize) > currentResizer._image.naturalHeight || valueY < 0) {
+            if ((y.value + size.value) > currentResizer._image.naturalHeight || y.value < 0) {
               disableButton();
             } else {
               activeButton();
             }
 
-            var sizeWidth = (Math.min(currentResizer._image.naturalWidth, currentResizer._image.naturalHeight) - Math.min(valueX, valueY));
-            if (valueSize > sizeWidth || valueSize < 0) {
+            var sizeWidth = (Math.min(currentResizer._image.naturalWidth, currentResizer._image.naturalHeight) - Math.min(x.value, y.value));
+            if (size.value > sizeWidth || size.value < 0) {
               disableButton();
             } else {
               activeButton();
