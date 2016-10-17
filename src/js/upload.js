@@ -161,58 +161,65 @@
 
           hideMessage();
 
-          // Проверка правильности введенных значений
-          function valideteForm() {
-            var x = document.querySelector('#resize-x').value;
-            var y = document.querySelector('#resize-y').value;
-            var size = document.querySelector('#resize-size').value;
-
-            // Деактивация кнопки
-            function disableButton() {
-              var formBatton = document.querySelector('#resize-fwd');
-              formBatton.setAttribute('disabled', 'disabled');
-            }
-
-            function activeBatton() {
-              var formBatton = document.querySelector('#resize-fwd');
-              formBatton.removeAttribute('disabled');
-            }
-
-            if (x < 0 || x > currentResizer._image.naturalWidth) {
-              disableButton();
-            } else {
-              activeBatton();
-            }
-
-            if (y < 0 || y > currentResizer._image.naturalHeight) {
-              disableButton();
-            } else {
-              activeBatton();
-            }
-
-            var sizeValue = (Math.min(currentResizer._image.naturalWidth, currentResizer._image.naturalHeight) - Math.min(x, y));
-            if (size < 0 || size > sizeValue) {
-              disableButton();
-            } else {
-              activeBatton();
-            }
-          }
-
-          valideteForm();
-
           var x = document.querySelector('#resize-x');
           var y = document.querySelector('#resize-y');
           var size = document.querySelector('#resize-size');
+          var formButton = document.querySelector('#resize-fwd');
 
-          x.oninput = function() {
+           // Деактивация кнопки
+          function disableButton() {
+            formButton.setAttribute('disabled', 'disabled');
+          }
+
+          // активация кнопки
+          function activeButton() {
+            formButton.removeAttribute('disabled');
+          }
+
+          // Проверка правильности введенных значений
+          function valideteForm() {
+
+            var valueX = x.value;
+            var valueY = y.value;
+            var valueSize = size.value;
+
+            if (typeof valueX != 'number' || typeof valueY != 'number' || typeof valueSize != 'number') {
+              disableButton();
+            } else {
+              activeButton();
+            }
+
+            if ((valueX + valueSize) > currentResizer._image.naturalWidth || valueX < 0 ) {
+              disableButton();
+            } else {
+              activeButton();
+            }
+
+            if ((valueX + valueSize) > currentResizer._image.naturalHeight || valueY < 0) {
+              disableButton();
+            } else {
+              activeButton();
+            }
+
+            var sizeWidth = (Math.min(currentResizer._image.naturalWidth, currentResizer._image.naturalHeight) - Math.min(valueX, valueY));
+            if (valueSize > sizeWidth || valueSize < 0) {
+              disableButton();
+            } else {
+              activeButton();
+            }
+          }
+          
+          valideteForm();
+
+          size.oninput = function() {
             valideteForm();
-          };
+          }; 
 
           y.oninput = function() {
             valideteForm();
           };
 
-          size.oninput = function() {
+          x.oninput = function() {
             valideteForm();
           };
         };
