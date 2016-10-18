@@ -281,12 +281,34 @@
     resizeForm.classList.remove('invisible');
   };
 
+  //Сохранение выбранного фильтра в cookies
+  function saveLastFilter() { 
+    ('upload-filter-none').oninput = function() { 
+      Cookies.set('upload-filter', 'none'); 
+    }; 
+
+    ('upload-filter-chrome').onclick = function() { 
+      Cookies.set('upload-filter', 'chrome'); 
+    }; 
+
+    ('upload-filter-sepia').onclick = function() { 
+      Cookies.set('upload-filter', 'sepia'); 
+    }; 
+
+    ('upload-filter-marvin').onclick = function() { 
+      Cookies.set('upload-filter', 'marvin'); 
+    }; 
+  }
+
   /**
    * Отправка формы фильтра. Возвращает в начальное состояние, предварительно
    * записав сохраненный фильтр в cookie.
    * @param {Event} evt
    */
   filterForm.onsubmit = function(evt) {
+
+    saveLastFilter();
+
     evt.preventDefault();
 
     cleanupResizer();
@@ -326,3 +348,5 @@
   cleanupResizer();
   updateBackground();
 })();
+
+console.log(document.cookie);
