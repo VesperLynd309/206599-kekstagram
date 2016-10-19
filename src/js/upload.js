@@ -270,6 +270,7 @@
   };
 
   resizeFormIsValid();
+
   /**
    * Сброс формы фильтра. Показывает форму кадрирования.
    * @param {Event} evt
@@ -280,34 +281,71 @@
     filterForm.classList.add('invisible');
     resizeForm.classList.remove('invisible');
   };
+  
+  var noneFilter = document.querySelector('#upload-filter-none');
+  var chromeFilter = document.querySelector('#upload-filter-chrome');
+  var sepiaFilter = document.querySelector('#upload-filter-sepia');
+  var marvinFilter = document.querySelector('#upload-filter-marvin');
 
-  //Сохранение выбранного фильтра в cookies
-  function saveLastFilter() { 
-    ('upload-filter-none').oninput = function() { 
-      Cookies.set('upload-filter', 'none'); 
-    }; 
+  filterForm.onclick = function() {
+  
+    // Расчет кол-ва дней с прошлого дня рождения Грейс Хоппер
+    function deleteCookie() {
+      var now = new Date();
+      var startDate = new Date('1970-01-01');
+      var GraseBirthday = new Date('1970-12-09');
 
-    ('upload-filter-chrome').onclick = function() { 
-      Cookies.set('upload-filter', 'chrome'); 
-    }; 
+      //кол-во дней с начала года и до дня рождения Грейс Хоппер
+      var daysBeforeBirthday = (GraseBirthday - startDate);
 
-    ('upload-filter-sepia').onclick = function() { 
-      Cookies.set('upload-filter', 'sepia'); 
-    }; 
+      var daysAfterBirthday = (365 * 24 * 60 * 60 * 1000) - daysBeforeBirthday;
 
-    ('upload-filter-marvin').onclick = function() { 
-      Cookies.set('upload-filter', 'marvin'); 
-    }; 
+      //день рождения Грейс Хоппер в текущем году
+      var GraseBirthdayInThisYear = Math.floor(now) + daysBeforeBirthday;
+
+      // разница между текущей датой и днем рождения Грейс Хоппер в текущем году
+      var calculateDays = (now - GraseBirthdayInThisYear);
+
+      if (calculateDays < 0) {
+        var A = now - Math.floor(now) + daysAfterBirthday;
+        var cookieDelete = A / (1000 * 60 * 60 * 24)
+      } else if (calculateDays > 0) {
+        var cookieDelete = calculateDays / (1000 * 60 * 60 * 24);
+      }
+      
+      return cookieDelete;
+    };
+    
+   //Сохранение выбранного фильтра в cookies
+   function saveLastFilter() { 
+     noneFilter.onclick = function() { 
+       //Cookies.set('upload-filter', 'none', { expires: 7 }); 
+       Cookies.set('upload-filter', 'none', { expires: deleteCookie() });
+     }; 
+
+     chromeFilter.onclick = function() { 
+      // Cookies.set('upload-filter', 'chrome'); 
+       Cookies.set('upload-filter', 'chrome', { expires: deleteCookie() });
+     }; 
+
+     sepiaFilter.onclick = function() { 
+        Cookies.set('upload-filter', 'sepia', { expires: deleteCookie() }); 
+     }; 
+
+      marvinFilter.onclick = function() { 
+       Cookies.set('upload-filter', 'marvin', { expires: deleteCookie() }); 
+     }; 
+    }
+
+    saveLastFilter();
   }
-
   /**
    * Отправка формы фильтра. Возвращает в начальное состояние, предварительно
    * записав сохраненный фильтр в cookie.
    * @param {Event} evt
    */
-  filterForm.onsubmit = function(evt) {
 
-    saveLastFilter();
+  filterForm.onsubmit = function(evt) {
 
     evt.preventDefault();
 
@@ -348,5 +386,3 @@
   cleanupResizer();
   updateBackground();
 })();
-
-console.log(document.cookie);
