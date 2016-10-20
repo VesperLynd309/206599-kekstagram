@@ -281,14 +281,19 @@
     filterForm.classList.add('invisible');
     resizeForm.classList.remove('invisible');
   };
+
   var noneFilter = document.querySelector('#upload-filter-none');
   var chromeFilter = document.querySelector('#upload-filter-chrome');
   var sepiaFilter = document.querySelector('#upload-filter-sepia');
   var marvinFilter = document.querySelector('#upload-filter-marvin');
 
   filterForm.onclick = function() {
+    saveFilter();
+  };
+
+  function saveFilter() {
     // Расчет кол-ва дней с прошлого дня рождения Грейс Хоппер
-    function deleteCookie() {
+    function DaysBeforeDeleteCookie() {
       var now = new Date();
       var startDate = new Date('1970-01-01');
       var GraseBirthday = new Date('1970-12-09');
@@ -305,35 +310,33 @@
       var calculateDays = (now - GraseBirthdayInThisYear);
 
       if (calculateDays < 0) {
-        var A = now - Math.floor(now) + daysAfterBirthday;
-        var cookieDelete = A / (1000 * 60 * 60 * 24);
+        var daysAfterLastBithday = now - Math.floor(now) + daysAfterBirthday;
+        var cookieDelete = daysAfterLastBithday / (1000 * 60 * 60 * 24);
       } 
 
       if (calculateDays > 0) {
         var cookieDelete = calculateDays / (1000 * 60 * 60 * 24);
       }
-    }
-   //Сохранение выбранного фильтра в cookies
-    function saveLastFilter() {
-      noneFilter.onclick = function() {
-        Cookies.set('upload-filter', 'none', { expires: deleteCookie() });
-      };
-
-      chromeFilter.onclick = function() { 
-        Cookies.set('upload-filter', 'chrome', { expires: deleteCookie() });
-      };
-
-      sepiaFilter.onclick = function() {
-        Cookies.set('upload-filter', 'sepia', { expires: deleteCookie() });
-      };
-
-      marvinFilter.onclick = function() {
-        Cookies.set('upload-filter', 'marvin', { expires: deleteCookie() });
-      };
+      return cookieDelete;
     }
 
-    saveLastFilter();
-  };
+    noneFilter.onclick = function() {
+      Cookies.set('upload-filter', 'none', { expires: DaysBeforeDeleteCookie() });
+    };
+
+    chromeFilter.onclick = function() { 
+      Cookies.set('upload-filter', 'chrome', { expires: DaysBeforeDeleteCookie() });
+    };
+
+    sepiaFilter.onclick = function() {
+      Cookies.set('upload-filter', 'sepia', { expires: DaysBeforeDeleteCookie() });
+    };
+
+    marvinFilter.onclick = function() {
+      Cookies.set('upload-filter', 'marvin', { expires: DaysBeforeDeleteCookie() });
+    };
+  }
+  
   /**
    * Отправка формы фильтра. Возвращает в начальное состояние, предварительно
    * записав сохраненный фильтр в cookie.
@@ -383,4 +386,4 @@
 })();
 
 
-console.log(document.cookie);
+console.dir(document.cookie);
