@@ -307,29 +307,29 @@
       if (calculateDays < 0) {
         var A = now - Math.floor(now) + daysAfterBirthday;
         var cookieDelete = A / (1000 * 60 * 60 * 24);
-      } else if (calculateDays > 0) {
+      } else {
         var cookieDelete = calculateDays / (1000 * 60 * 60 * 24);
       }
       return cookieDelete;
     }
    //Сохранение выбранного фильтра в cookies
     function saveLastFilter() {
-     noneFilter.onclick = function() {
+      noneFilter.onclick = function() {
        Cookies.set('upload-filter', 'none', { expires: deleteCookie() });
      };
 
-     chromeFilter.onclick = function() { 
+      chromeFilter.onclick = function() { 
        Cookies.set('upload-filter', 'chrome', { expires: deleteCookie() });
      };
 
-     sepiaFilter.onclick = function() {
+      sepiaFilter.onclick = function() {
        Cookies.set('upload-filter', 'sepia', { expires: deleteCookie() });
      };
 
-     marvinFilter.onclick = function() {
+      marvinFilter.onclick = function() {
        Cookies.set('upload-filter', 'marvin', { expires: deleteCookie() });
      };
-   }
+    }
 
     saveLastFilter();
   };
