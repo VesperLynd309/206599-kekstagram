@@ -281,14 +281,12 @@
     filterForm.classList.add('invisible');
     resizeForm.classList.remove('invisible');
   };
-  
   var noneFilter = document.querySelector('#upload-filter-none');
   var chromeFilter = document.querySelector('#upload-filter-chrome');
   var sepiaFilter = document.querySelector('#upload-filter-sepia');
   var marvinFilter = document.querySelector('#upload-filter-marvin');
 
   filterForm.onclick = function() {
-  
     // Расчет кол-ва дней с прошлого дня рождения Грейс Хоппер
     function deleteCookie() {
       var now = new Date();
@@ -308,37 +306,34 @@
 
       if (calculateDays < 0) {
         var A = now - Math.floor(now) + daysAfterBirthday;
-        var cookieDelete = A / (1000 * 60 * 60 * 24)
+        var cookieDelete = A / (1000 * 60 * 60 * 24);
       } else if (calculateDays > 0) {
         var cookieDelete = calculateDays / (1000 * 60 * 60 * 24);
       }
-      
       return cookieDelete;
     };
     
    //Сохранение выбранного фильтра в cookies
    function saveLastFilter() { 
      noneFilter.onclick = function() { 
-       //Cookies.set('upload-filter', 'none', { expires: 7 }); 
        Cookies.set('upload-filter', 'none', { expires: deleteCookie() });
      }; 
 
      chromeFilter.onclick = function() { 
-      // Cookies.set('upload-filter', 'chrome'); 
        Cookies.set('upload-filter', 'chrome', { expires: deleteCookie() });
      }; 
 
      sepiaFilter.onclick = function() { 
-        Cookies.set('upload-filter', 'sepia', { expires: deleteCookie() }); 
-     }; 
+        Cookies.set('upload-filter', 'sepia', { expires: deleteCookie() });
+     };
 
-      marvinFilter.onclick = function() { 
-       Cookies.set('upload-filter', 'marvin', { expires: deleteCookie() }); 
-     }; 
+     marvinFilter.onclick = function() {
+      Cookies.set('upload-filter', 'marvin', { expires: deleteCookie() });
+      };
     }
 
     saveLastFilter();
-  }
+  };
   /**
    * Отправка формы фильтра. Возвращает в начальное состояние, предварительно
    * записав сохраненный фильтр в cookie.
