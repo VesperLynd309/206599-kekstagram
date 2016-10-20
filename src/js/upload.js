@@ -311,26 +311,25 @@
         var cookieDelete = calculateDays / (1000 * 60 * 60 * 24);
       }
       return cookieDelete;
-    };
-    
+    }
    //Сохранение выбранного фильтра в cookies
-   function saveLastFilter() { 
-     noneFilter.onclick = function() { 
+    function saveLastFilter() {
+     noneFilter.onclick = function() {
        Cookies.set('upload-filter', 'none', { expires: deleteCookie() });
-     }; 
+     };
 
      chromeFilter.onclick = function() { 
        Cookies.set('upload-filter', 'chrome', { expires: deleteCookie() });
-     }; 
+     };
 
-     sepiaFilter.onclick = function() { 
-        Cookies.set('upload-filter', 'sepia', { expires: deleteCookie() });
+     sepiaFilter.onclick = function() {
+       Cookies.set('upload-filter', 'sepia', { expires: deleteCookie() });
      };
 
      marvinFilter.onclick = function() {
-      Cookies.set('upload-filter', 'marvin', { expires: deleteCookie() });
-      };
-    }
+       Cookies.set('upload-filter', 'marvin', { expires: deleteCookie() });
+     };
+   }
 
     saveLastFilter();
   };
