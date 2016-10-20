@@ -293,7 +293,7 @@
 
   function saveFilter() {
     // Расчет кол-ва дней с прошлого дня рождения Грейс Хоппер
-    function DaysBeforeDeleteCookie() {
+    function daysBeforeDeleteCookie() {
       var now = new Date();
       var startDate = new Date('1970-01-01');
       var GraseBirthday = new Date('1970-12-09');
@@ -312,7 +312,7 @@
       if (calculateDays < 0) {
         var daysAfterLastBithday = now - Math.floor(now) + daysAfterBirthday;
         var cookieDelete = daysAfterLastBithday / (1000 * 60 * 60 * 24);
-      } 
+      }
 
       if (calculateDays > 0) {
         var cookieDelete = calculateDays / (1000 * 60 * 60 * 24);
@@ -321,22 +321,22 @@
     }
 
     noneFilter.onclick = function() {
-      Cookies.set('upload-filter', 'none', { expires: DaysBeforeDeleteCookie() });
+      Cookies.set('upload-filter', 'none', { expires: daysBeforeDeleteCookie() });
     };
 
-    chromeFilter.onclick = function() { 
-      Cookies.set('upload-filter', 'chrome', { expires: DaysBeforeDeleteCookie() });
+    chromeFilter.onclick = function() {
+      Cookies.set('upload-filter', 'chrome', { expires: daysBeforeDeleteCookie() });
     };
 
     sepiaFilter.onclick = function() {
-      Cookies.set('upload-filter', 'sepia', { expires: DaysBeforeDeleteCookie() });
+      Cookies.set('upload-filter', 'sepia', { expires: daysBeforeDeleteCookie() });
     };
 
     marvinFilter.onclick = function() {
-      Cookies.set('upload-filter', 'marvin', { expires: DaysBeforeDeleteCookie() });
+      Cookies.set('upload-filter', 'marvin', { expires: daysBeforeDeleteCookie() });
     };
   }
-  
+
   /**
    * Отправка формы фильтра. Возвращает в начальное состояние, предварительно
    * записав сохраненный фильтр в cookie.
@@ -384,6 +384,3 @@
   cleanupResizer();
   updateBackground();
 })();
-
-
-console.dir(document.cookie);
