@@ -1,4 +1,5 @@
 /* global Resizer: true */
+/* global Cookies */
 
 /**
  * @fileoverview
@@ -312,9 +313,7 @@
       if (calculateDays < 0) {
         var daysAfterLastBithday = now - Math.floor(now) + daysAfterBirthday;
         var cookieDelete = daysAfterLastBithday / (1000 * 60 * 60 * 24);
-      }
-
-      if (calculateDays > 0) {
+      } else {
         var cookieDelete = calculateDays / (1000 * 60 * 60 * 24);
       }
       return cookieDelete;
