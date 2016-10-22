@@ -115,8 +115,9 @@ var pictures = [{
 }];
 
 //Проверка наличия свойства preview
-function emptyObject(pictures) {
-  for (pictures.preview in pictures) {
+function emptyObject(picture) {
+  //for (pictures.preview in pictures) {
+  if (picture.preview) {
     return true;
   }
     return false;
@@ -136,9 +137,11 @@ var getPictureElement = function(picture) {
   };
 
   pictureImage.onerror = function() {
-    if (emptyObject(pictures) === true) {
+    if (emptyObject(picture) === true) {
+      clearTimeout(pictureImageTimeout);
       pictureElement.querySelector('img').src = picture.preview;
     } else {
+
       pictureElement.classList.add('picture-load-failure');
     }
   };
