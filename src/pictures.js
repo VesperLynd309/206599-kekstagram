@@ -2,6 +2,7 @@
 
 document.querySelector('.filters').classList.add('hidden');
 
+var PICTURE_LOAD_TIMEOUT = 1000;
 var container = document.querySelector('.pictures');
 var template = document.querySelector('#picture-template');
 var templateContainer = 'content' in template ? template.content : template;
@@ -127,8 +128,10 @@ var getPictureElement = function(picture) {
   pictureElement.querySelector('.picture-comments').textContent = picture.comments;
 
   var pictureImage = new Image(182, 182);
+  var pictureImageTimeout = null;
 
   pictureImage.onload = function() {
+    clearTimeout(pictureImageTimeout);
     pictureElement.querySelector('img').src = picture.url;
   };
 
@@ -141,6 +144,11 @@ var getPictureElement = function(picture) {
   };
 
   pictureImage.src = picture.url;
+
+  pictureImageTimeout = setTimeout(function() {
+    pictureElement.classList.add('picture-load-failure');
+  }, PICTURE_LOAD_TIMEOUT);
+
 
   return pictureElement;
 };
