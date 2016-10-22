@@ -1,5 +1,9 @@
 'use strict';
 
+var container = document.querySelector('.pictures');
+var template = document.querySelector('#picture-template');
+var templateContainer = 'content' in template ? template.content : template;
+
 var pictures = [{
   "likes": 40,
   "comments": 12,
@@ -107,38 +111,15 @@ var pictures = [{
   "preview": "photos/26.jpg"
 }];
 
-document.querySelectorAll('.filters').classList.add('hidden');
-
-
-
-
-
-
-
-var container = document.querySelector('.pictures');
-var template = document.querySelector('#picture-template');
-var templateContainer = 'content' in template ? template.content : template;
-
-
 var getPictureElement = function(picture) {
-  var pictureElement = templateContainer.querySelector('.picture-stats').cloneNode(true);
+  var pictureElement = templateContainer.querySelector('.picture').cloneNode(true);
   pictureElement.querySelector('.picture-likes').textContent = pictures.likes;
   pictureElement.querySelector('.picture-comments').textContent = pictures.comments;
-  
-  var image = new Image(182, 182);
-
-  backgroundImage.onload = function(evt) {
-    pictureElement.style.background = 'url(\'' + evt.target.src + '\')';
-  };
-
-  backgroundImage.onerror = function() {
-    pictureElement.classList.add('picture-load-failure');
-  };
-  
-  image.src = picture.preview;
-
   return pictureElement;
+}
+
+var renderPictures = function(pictures) {
+  pictures.forEach(function(picture) {
+    container.appendChild(getPictureElement(picture));
+  });
 };
-
-document.querySelectorAll('.filters').classList.remove('hidden');
-
