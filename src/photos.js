@@ -1,6 +1,6 @@
 'use strict';
 
-[{
+pictures = [{
   "likes": 40,
   "comments": 12,
   "url": "photos/1.jpg"

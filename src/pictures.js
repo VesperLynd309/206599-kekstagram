@@ -1,28 +1,32 @@
 'use strict';
 
-var PICTURES_LOAD_URL = '#';
+var PICTURES_LOAD_URL = 'http://localhost:1507/api/pictures';
 
-var load = function(url, callback) {
+var load = function(url, callback, callbackName) {
+
+  if (!callbackName) {
+    callbackName = 'cb' + Date.now();
+  }
   
-  window[callback] = function(data) {
-    callback(data);
+  window[callbackName] = function(pictures) {
+    callback(pictures);
   }
   
   var script = document.createElement('script');
-  script.src = url + '?callback=';
+  script.src = url + '?callback=' + callbackName;
   document.body.appendChild(script);
 };
 
 
-load(PICTURES_LOAD_URL, function(data) {
-  console.log(data);
+load(PICTURES_LOAD_URL, function(pictures) {
+  console.log(pictures);
 });
 
 
 
 
 
-
+/*
 
 document.querySelector('.filters').classList.add('hidden');
 
@@ -189,3 +193,4 @@ var renderPictures = function(pictures) {
 renderPictures(pictures);
 
 document.querySelector('.filters').classList.remove('hidden');
+*/
