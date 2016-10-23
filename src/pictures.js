@@ -1,5 +1,29 @@
 'use strict';
 
+var PICTURES_LOAD_URL = '#';
+
+var load = function(url, callback) {
+  
+  window[callback] = function(data) {
+    callback(data);
+  }
+  
+  var script = document.createElement('script');
+  script.src = url + '?callback=';
+  document.body.appendChild(script);
+};
+
+
+load(PICTURES_LOAD_URL, function(data) {
+  console.log(data);
+});
+
+
+
+
+
+
+
 document.querySelector('.filters').classList.add('hidden');
 
 var PICTURE_LOAD_TIMEOUT = 1000;
