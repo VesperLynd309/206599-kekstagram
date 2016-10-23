@@ -6,7 +6,7 @@ var PICTURE_LOAD_TIMEOUT = 1000;
 var container = document.querySelector('.pictures');
 var template = document.querySelector('#picture-template');
 var templateContainer = 'content' in template ? template.content : template;
-var PICTURES_LOAD_URL = 'http://localhost:1507/api/pictures';
+var PICTURES_LOAD_URL = '//localhost:1507/api/pictures';
 
 var load = function(url, callback, callbackName) {
   if (!callbackName) {
