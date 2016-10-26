@@ -16,12 +16,12 @@ module.exports = function(picture) {
   var pictureImageTimeout = null;
 
   //Проверка наличия свойства preview
-  function emptyObject(picture) {
+  function emptyObject() {
     if (picture.preview) {
-    return true;
-  }
-    return false;
-  }
+      return true;
+    }
+      return false;
+    }
 
   pictureImage.onload = function() {
     clearTimeout(pictureImageTimeout);
