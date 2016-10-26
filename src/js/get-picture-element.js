@@ -2,7 +2,6 @@
 
 // Создание DOM-элемента картинки и загрузка фото
 module.exports = function(picture) {
-  document.querySelector('.filters').classList.add('hidden');
 
   var PICTURE_LOAD_TIMEOUT = 1000;
   var template = document.querySelector('#picture-template');
@@ -20,8 +19,8 @@ module.exports = function(picture) {
     if (picture.preview) {
       return true;
     }
-      return false;
-    }
+    return false;
+  }
 
   pictureImage.onload = function() {
     clearTimeout(pictureImageTimeout);
@@ -45,7 +44,5 @@ module.exports = function(picture) {
   }, PICTURE_LOAD_TIMEOUT);
 
   return pictureElement;
-
-  document.querySelector('.filters').classList.remove('hidden');
 };
 
