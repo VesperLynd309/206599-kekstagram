@@ -1,18 +1,19 @@
 'use strict';
 
-define([
-  '../js/load',
-  '../js/get-picture-element',
-], function(load, getPictureElement) {
-  	var container = document.querySelector('.pictures');
-	var PICTURES_LOAD_URL = '//localhost:1507/api/pictures';
+//Получение данных со списком картинок
+(function() {
+  var load = require('../js/load');
+  var getPictureElement = require('../js/get-picture-element');
 
-	// Отрисовка списка на странице
-	var renderPictures = function(pictures) {
-  	   pictures.forEach(function(picture) {
+  var container = document.querySelector('.pictures');
+  var PICTURES_LOAD_URL = '//localhost:1507/api/pictures';
+
+  // Отрисовка списка на странице
+  var renderPictures = function(pictures) {
+  	pictures.forEach(function(picture) {
        container.appendChild(getPictureElement(picture));
   	});
-   };
+  };
 
-	load(PICTURES_LOAD_URL, renderPictures, '__jsonpCallback');
-});
+  load(PICTURES_LOAD_URL, renderPictures, '__jsonpCallback');
+})();
