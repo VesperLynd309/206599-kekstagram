@@ -12,9 +12,9 @@
 
   // Отрисовка списка на странице
   var renderPictures = function(pictures) {
-	pictures.forEach(function(picture) {
-	container.appendChild(getPictureElement(picture));
- });
+	    pictures.forEach(function(picture) {
+	  container.appendChild(getPictureElement(picture));
+});
   };
 
   load(PICTURES_LOAD_URL, renderPictures, '__jsonpCallback');
