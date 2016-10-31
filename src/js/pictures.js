@@ -1,4 +1,5 @@
 'use strict';
+
 var gallery = require('../js/gallery');
 
 //Получение данных со списком картинок
