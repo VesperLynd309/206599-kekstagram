@@ -1,8 +1,9 @@
 'use strict';
-  var gallery = require('../js/gallery');
+
+var gallery = require('../js/gallery');
 
 // Создание DOM-элемента картинки и загрузка фото
-module.exports = function(picture, number) {
+var getPictureElement = function(picture, number) {
 
   var PICTURE_LOAD_TIMEOUT = 1000;
   var template = document.querySelector('#picture-template');
@@ -53,3 +54,4 @@ module.exports = function(picture, number) {
   return pictureElement;
 };
 
+module.exports = getPictureElement;

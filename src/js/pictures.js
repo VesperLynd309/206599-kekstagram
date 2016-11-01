@@ -1,14 +1,12 @@
 'use strict';
 
+var load = require('../js/load');
+var getPictureElement = require('../js/picture');
 var gallery = require('../js/gallery');
 
 //Получение данных со списком картинок
-(function() {
+(module.exports = function() {
   document.querySelector('.filters').classList.add('hidden');
-
-
-  var load = require('../js/load');
-  var getPictureElement = require('../js/picture');
 
   var container = document.querySelector('.pictures');
   var PICTURES_LOAD_URL = '//localhost:1507/api/pictures';
@@ -18,7 +16,7 @@ var gallery = require('../js/gallery');
     pictures.forEach(function(picture, number) {
       container.appendChild(getPictureElement(picture, number));
     });
-    Gallery.setPictures(pictures);
+   // gallery.setPictures(pictures);
   };
 
   load(PICTURES_LOAD_URL, renderPictures, '__jsonpCallback');
