@@ -28,7 +28,7 @@ Gallery.prototype.show = function(number) {
 		}
 	}
 
-	galleryContainer.classList.remove('invisible');
+	//galleryContainer.classList.remove('invisible');
 
 	self.setActivePicture(number);
 };
