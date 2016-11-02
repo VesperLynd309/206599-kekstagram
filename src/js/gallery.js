@@ -9,40 +9,43 @@ var Gallery = function () {
 	this.galleryPicture = document.querySelector('.gallery-overlay-image');
 };
 
-Gallery.prototype.setPictures = function() {
+Gallery.prototype.setPictures = function(pictures) {
 	this.pictures = pictures;
 }
-	
+
 Gallery.prototype.show = function(number) {
 	var self = this;
 
 	this.galleryClose.onclick = function() {
 		self.hide();
 	}
-		
+
 	this.galleryPicture.onclick = function() {
 		if (number === self.pictures.length - 1) {
-			self.setActivePicture(self.activePicture(0))
+			self.setActivePicture(0);
 		} else {
-		self.setActivePicture(self.activePicture + 1);
+		self.setActivePicture(number + 1);
 		}
 	}
 
-	//galleryContainer.classList.remove('invisible');
+	this.galleryContainer.classList.remove('invisible');
 
 	self.setActivePicture(number);
 };
 
 Gallery.prototype.hide = function() {
-	galleryContainer.classList.add('invisible');
+	this.galleryContainer.classList.add('invisible');
 	this.galleryClose.onclick = null;
 	this.galleryPicture.onclick = null;
 },
-	
+
 Gallery.prototype.setActivePicture = function(number) {
+	this.pictureLikes = document.querySelector('.likes-count');
+	this.pictureComments = document.querySelector('.comments-count');
 	self.activePicture = number;
-	this.pictureElement.querySelector('.likes-count').textContent = this.pictures[number].likes;
-    this.pictureElement.querySelector('.comments-count').textContent = this.pictures[number].comments;
+	this.galleryPicture.src = this.pictures[number].url;
+	this.pictureLikes.textContent = this.pictures[number].likes;
+    this.pictureComments.textContent = this.pictures[number].comments;
 };
 
 module.exports = new Gallery();
