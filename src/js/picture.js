@@ -47,7 +47,7 @@ var getPictureElement = function(picture, number) {
 
 
   pictureElement.onclick = function(evt) {
-  	gallery.show(number);
+    gallery.show(number);
     evt.preventDefault();
   };
 
