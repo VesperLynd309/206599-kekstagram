@@ -1,8 +1,8 @@
 'use strict';
 
-var load = require('../js/load');
-var getPictureElement = require('../js/picture');
-var gallery = require('../js/gallery');
+var load = require('./load');
+var getPictureElement = require('./picture');
+var gallery = require('./gallery');
 
 //Получение данных со списком картинок
 (module.exports = function() {
@@ -16,7 +16,7 @@ var gallery = require('../js/gallery');
     pictures.forEach(function(picture, number) {
       container.appendChild(getPictureElement(picture, number));
     });
-   // gallery.setPictures(pictures);
+    gallery.setPictures(pictures);
   };
 
   load(PICTURES_LOAD_URL, renderPictures, '__jsonpCallback');
