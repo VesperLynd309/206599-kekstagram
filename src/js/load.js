@@ -1,7 +1,7 @@
 'use strict';
 
 //JSONP
-module.exports = function(url, callback, callbackName) {
+var load = function(url, callback, callbackName) {
   if (!callbackName) {
     callbackName = 'cb' + Date.now();
   }
@@ -14,3 +14,5 @@ module.exports = function(url, callback, callbackName) {
   script.src = url + '?callback=' + callbackName;
   document.body.appendChild(script);
 };
+
+module.exports = load;

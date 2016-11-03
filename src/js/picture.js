@@ -1,7 +1,9 @@
 'use strict';
 
+var gallery = require('../js/gallery');
+
 // Создание DOM-элемента картинки и загрузка фото
-module.exports = function(picture) {
+var getPictureElement = function(picture, number) {
 
   var PICTURE_LOAD_TIMEOUT = 1000;
   var template = document.querySelector('#picture-template');
@@ -43,6 +45,13 @@ module.exports = function(picture) {
     pictureElement.classList.add('picture-load-failure');
   }, PICTURE_LOAD_TIMEOUT);
 
+
+  pictureElement.onclick = function(evt) {
+    gallery.show(number);
+    evt.preventDefault();
+  };
+
   return pictureElement;
 };
 
+module.exports = getPictureElement;
