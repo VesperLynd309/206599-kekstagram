@@ -1,10 +1,22 @@
 'use strict';
 
-var gallery = require('../js/gallery');
+var gallery = require('./gallery');
+
+var Picture = function(picture, number) {
+  this.data = picture;
+  this.element = getPictureElement(picture, number);
+  var self = this;
+  this.element.onclick = function(evt) {
+    gallery.show(number);
+    evt.preventDefault();
+  };
+  this.remove = function() {
+    self.element.onclick = null;
+  };
+};
 
 // Создание DOM-элемента картинки и загрузка фото
-var getPictureElement = function(picture, number) {
-
+var getPictureElement = function(picture) {
   var PICTURE_LOAD_TIMEOUT = 1000;
   var template = document.querySelector('#picture-template');
   var templateContainer = 'content' in template ? template.content : template;
@@ -45,13 +57,7 @@ var getPictureElement = function(picture, number) {
     pictureElement.classList.add('picture-load-failure');
   }, PICTURE_LOAD_TIMEOUT);
 
-
-  pictureElement.onclick = function(evt) {
-    gallery.show(number);
-    evt.preventDefault();
-  };
-
   return pictureElement;
 };
 
-module.exports = getPictureElement;
+module.exports = Picture;

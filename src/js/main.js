@@ -1,6 +1,6 @@
 'use strict';
 
-require('../js/pictures');
-require('../js/upload');
-require('../js/resizer');
+require('./pictures');
+require('./upload');
+require('./resizer');
 
