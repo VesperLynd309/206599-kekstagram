@@ -1,7 +1,7 @@
 'use strict';
 
 var Gallery = function() {
-	//var self = this;
+
   this.pictures = [];
   this.activePicture = 0;
   this.galleryContainer = document.querySelector('.gallery-overlay');
