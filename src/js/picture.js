@@ -2,19 +2,6 @@
 
 var gallery = require('./gallery');
 
-var Picture = function(picture, number) {
-  this.data = picture;
-  this.element = getPictureElement(picture, number);
-  var self = this;
-  this.element.onclick = function(evt) {
-    gallery.show(number);
-    evt.preventDefault();
-  };
-  this.remove = function() {
-    self.element.onclick = null;
-  };
-};
-
 // Создание DOM-элемента картинки и загрузка фото
 var getPictureElement = function(picture) {
   var PICTURE_LOAD_TIMEOUT = 1000;
@@ -57,6 +44,19 @@ var getPictureElement = function(picture) {
   }, PICTURE_LOAD_TIMEOUT);
 
   return pictureElement;
+};
+
+var Picture = function(picture, number) {
+  this.data = picture;
+  this.element = getPictureElement(picture, number);
+  var self = this;
+  this.element.onclick = function(evt) {
+    gallery.show(number);
+    evt.preventDefault();
+  };
+  this.remove = function() {
+    self.element.onclick = null;
+  };
 };
 
 module.exports = Picture;
