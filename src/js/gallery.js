@@ -1,7 +1,5 @@
 'use strict';
 
-var PICTURE_LOAD_TIMEOUT = 1000;
-
 var Gallery = function() {
 
   this.pictures = [];
