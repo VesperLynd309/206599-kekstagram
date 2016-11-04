@@ -46,7 +46,6 @@ var getPictureElement = function(picture) {
       clearTimeout(pictureImageTimeout);
       pictureElement.querySelector('img').src = picture.preview;
     } else {
-
       pictureElement.classList.add('picture-load-failure');
     }
   };

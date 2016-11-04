@@ -1,5 +1,7 @@
 'use strict';
 
+var PICTURE_LOAD_TIMEOUT = 1000;
+
 var Gallery = function() {
 
   this.pictures = [];
@@ -43,7 +45,20 @@ Gallery.prototype.setActivePicture = function(number) {
   this.pictureLikes = document.querySelector('.likes-count');
   this.pictureComments = document.querySelector('.comments-count');
   self.activePicture = number;
-  this.galleryPicture.src = this.pictures[number].url;
+  this.galleryPictureContainer = document.querySelector('.gallery-overlay-preview');
+
+  this.galleryPictureContainer = new Image();
+  var that = this;
+
+  this.galleryPictureContainer.onload = function(evt) {
+  	that.galleryPicture.src = that.pictures[number].url;
+  };
+
+  this.galleryPictureContainer.onerror = function(evt) {
+  	that.galleryPicture.classList.add('picture-load-failure');
+  };
+
+  this.galleryPictureContainer = this.pictures[number].url;
   this.pictureLikes.textContent = this.pictures[number].likes;
   this.pictureComments.textContent = this.pictures[number].comments;
 };
