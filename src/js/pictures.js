@@ -1,7 +1,7 @@
 'use strict';
 
 var load = require('./load');
-var getPictureElement = require('./picture');
+var Picture = require('./picture');
 var gallery = require('./gallery');
 
 //Получение данных со списком картинок
@@ -14,7 +14,7 @@ var gallery = require('./gallery');
   // Отрисовка списка на странице
   var renderPictures = function(pictures) {
     pictures.forEach(function(picture, number) {
-      container.appendChild(getPictureElement(picture, number));
+      container.appendChild(new Picture(picture, number).element);
     });
     gallery.setPictures(pictures);
   };
