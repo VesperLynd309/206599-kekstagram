@@ -43,11 +43,12 @@ Gallery.prototype.setActivePicture = function(number) {
   this.pictureLikes = document.querySelector('.likes-count');
   this.pictureComments = document.querySelector('.comments-count');
   this.activePicture = number;
-
-  this.galleryPicture.onerror = function() {
-    self.galleryPicture.classList.add('picture-load-failure');
-  };
+  var that = this;
   
+  this.galleryPicture.onerror = function(evt) {
+    that.galleryPicture.classList.add('gallery-picture-load-failure');
+  };
+ 
   this.galleryPicture.src = this.pictures[number].url;
   this.pictureLikes.textContent = this.pictures[number].likes;
   this.pictureComments.textContent = this.pictures[number].comments;
