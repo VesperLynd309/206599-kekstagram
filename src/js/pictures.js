@@ -6,7 +6,7 @@ var gallery = require('./gallery');
 
 //Получение данных со списком картинок
 (module.exports = function() {
-  var filters =  document.querySelector('.filters');
+  var filters = document.querySelector('.filters');
   filters.classList.add('hidden');
 
   var container = document.querySelector('.pictures');
@@ -59,5 +59,5 @@ var gallery = require('./gallery');
     }
   });
 
-filters.classList.remove('hidden');
+  filters.classList.remove('hidden');
 })();
