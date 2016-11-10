@@ -50,7 +50,7 @@ var gallery = require('./gallery');
   var lastCall = Date.now();
 
   changeFilter();
-  
+
   window.addEventListener('scroll', function() {
     if (Date.now() - lastCall >= THROTTLE_TIMEOUT) {
       if (footer.getBoundingClientRect().bottom - window.innerHeight <= GAP) {
