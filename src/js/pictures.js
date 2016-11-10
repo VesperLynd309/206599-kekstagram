@@ -26,6 +26,15 @@ var gallery = require('./gallery');
     gallery.setPictures(pictures);
   };
 
+  var addMorePictures = function() {
+    if (container.getBoundingClientRect().height < window.innerHeight - footer.getBoundingClientRect().height) {
+      load(PICTURES_LOAD_URL, {
+      from: 0,
+      to: 11,
+    }, renderPictures);
+    }
+  };
+
   // смена фильтра с отрисовкой нового списка картинок
   var changeFilter = function(filterID) {
     container.innerHTML = '';
@@ -35,6 +44,7 @@ var gallery = require('./gallery');
       to: 11,
       filter: filterID
     }, renderPictures);
+    addMorePictures();
   };
 
   var lastCall = Date.now();
@@ -48,6 +58,7 @@ var gallery = require('./gallery');
           filter: filter
         }, renderPictures);
         pageNumber++;
+        addMorePictures();
       }
       lastCall = Date.now();
     }
