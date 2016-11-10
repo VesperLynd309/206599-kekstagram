@@ -29,9 +29,9 @@ var gallery = require('./gallery');
   var addMorePictures = function() {
     if (container.getBoundingClientRect().height < window.innerHeight - footer.getBoundingClientRect().height) {
       load(PICTURES_LOAD_URL, {
-      from: 0,
-      to: 11,
-    }, renderPictures);
+        from: 0,
+        to: 11,
+      }, renderPictures);
     }
   };
 
