@@ -140,7 +140,7 @@
    * и показывается форма кадрирования.
    * @param {Event} evt
    */
-  uploadForm.onchange = function(evt) {
+  uploadForm.addEventListener('change', function(evt) {
     var element = evt.target;
     if (element.id === 'upload-file') {
       // Проверка типа загружаемого файла, тип должен быть изображением
@@ -150,7 +150,7 @@
 
         showMessage(Action.UPLOADING);
 
-        fileReader.onload = function() {
+        fileReader.addEventListener('load', function() {
           cleanupResizer();
 
           currentResizer = new Resizer(fileReader.result);
@@ -211,18 +211,18 @@
           }
           valideteForm();
 
-          size.oninput = function() {
+          size.addEventListener('input', function() {
             valideteForm();
-          };
+          });
 
-          y.oninput = function() {
+          y.addEventListener('input', function() {
             valideteForm();
-          };
+          });
 
-          x.oninput = function() {
+          x.addEventListener('input', function() {
             valideteForm();
-          };
-        };
+          });
+        });
 
         fileReader.readAsDataURL(element.files[0]);
       } else {
@@ -230,14 +230,14 @@
         showMessage(Action.ERROR);
       }
     }
-  };
+  });
 
   /**
    * Обработка сброса формы кадрирования. Возвращает в начальное состояние
    * и обновляет фон.
    * @param {Event} evt
    */
-  resizeForm.onreset = function(evt) {
+  resizeForm.addEventListener('reset', function(evt) {
     evt.preventDefault();
 
     cleanupResizer();
@@ -245,14 +245,14 @@
 
     resizeForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
-  };
+  });
 
   /**
    * Обработка отправки формы кадрирования. Если форма валидна, экспортирует
    * кропнутое изображение в форму добавления фильтра и показывает ее.
    * @param {Event} evt
    */
-  resizeForm.onsubmit = function(evt) {
+  resizeForm.addEventListener('submit', function(evt) {
     evt.preventDefault();
 
     if (resizeFormIsValid()) {
@@ -263,12 +263,14 @@
         thumbnails[i].style.backgroundImage = 'url(' + image + ')';
       }
 
+
+
       filterImage.src = image;
 
       resizeForm.classList.add('invisible');
       filterForm.classList.remove('invisible');
     }
-  };
+  });
 
   resizeFormIsValid();
 
@@ -276,21 +278,21 @@
    * Сброс формы фильтра. Показывает форму кадрирования.
    * @param {Event} evt
    */
-  filterForm.onreset = function(evt) {
+  filterForm.addEventListener('reset', function(evt) {
     evt.preventDefault();
 
     filterForm.classList.add('invisible');
     resizeForm.classList.remove('invisible');
-  };
+  });
 
   var noneFilter = document.querySelector('#upload-filter-none');
   var chromeFilter = document.querySelector('#upload-filter-chrome');
   var sepiaFilter = document.querySelector('#upload-filter-sepia');
   var marvinFilter = document.querySelector('#upload-filter-marvin');
 
-  filterForm.onclick = function() {
+  filterForm.addEventListener('click', function() {
     saveFilter();
-  };
+  });
 
   function saveFilter() {
     // Расчет кол-ва дней с прошлого дня рождения Грейс Хоппер
@@ -321,21 +323,21 @@
       return cookieDelete;
     }
 
-    noneFilter.onclick = function() {
+    noneFilter.addEventListener('click', function() {
       Cookies.set('upload-filter', 'none', { expires: daysBeforeDeleteCookie() });
-    };
+    });
 
-    chromeFilter.onclick = function() {
+    chromeFilter.addEventListener('click', function() {
       Cookies.set('upload-filter', 'chrome', { expires: daysBeforeDeleteCookie() });
-    };
+    });
 
-    sepiaFilter.onclick = function() {
+    sepiaFilter.addEventListener('click', function() {
       Cookies.set('upload-filter', 'sepia', { expires: daysBeforeDeleteCookie() });
-    };
+    });
 
-    marvinFilter.onclick = function() {
+    marvinFilter.addEventListener('click', function() {
       Cookies.set('upload-filter', 'marvin', { expires: daysBeforeDeleteCookie() });
-    };
+    });
   }
 
   /**
@@ -344,7 +346,7 @@
    * @param {Event} evt
    */
 
-  filterForm.onsubmit = function(evt) {
+  filterForm.addEventListener('submit', function(evt) {
 
     evt.preventDefault();
 
@@ -353,13 +355,13 @@
 
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
-  };
+  });
 
   /**
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
    * выбранному значению в форме.
    */
-  filterForm.onchange = function() {
+  filterForm.addEventListener('change', function() {
     if (!filterMap) {
       // Ленивая инициализация. Объект не создается до тех пор, пока
       // не понадобится прочитать его в первый раз, а после этого запоминается
@@ -380,7 +382,24 @@
     // убрать предыдущий примененный класс. Для этого нужно или запоминать его
     // состояние или просто перезаписывать.
     filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
-  };
+  });
+
+  // Обновление currentResizer с новыми значениями в форме.
+  var newPictureSize = document.querySelector('.upload-resize-controls');
+  newPictureSize.addEventListener('change', function() {
+    currentResizer.setConstraint(resizeForm.querySelector('#resize-x').value,
+      resizeForm.querySelector('#resize-y').value,
+      resizeForm.querySelector('#resize-size').value);
+  });
+
+  // Добавление значений смещения в форму.
+  window.addEventListener('resizerchange', function() {
+    var constraint = currentResizer.getConstraint();
+
+    resizeForm.querySelector('#resize-x').value = constraint.x;
+    resizeForm.querySelector('#resize-y').value = constraint.y;
+    resizeForm.querySelector('#resize-size').value = constraint.side;
+  });
 
   cleanupResizer();
   updateBackground();
