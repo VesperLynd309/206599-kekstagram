@@ -3,4 +3,3 @@
 require('./pictures');
 require('./upload');
 require('./resizer');
-
