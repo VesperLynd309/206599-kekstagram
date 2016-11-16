@@ -205,12 +205,11 @@
             var sizeWidth = (Math.min(currentResizer._image.naturalWidth, currentResizer._image.naturalHeight) - Math.min(valueX, valueY));
             if (valueSize > sizeWidth || valueSize < 0) {
               disableButton();
-            } 
-
-            if((valueX - Math.round(valueX)) != 0 || (valueY - Math.round(valueY)) !=0 || (valueSize - Math.round(valueSize)) !=0) {
-              disableButton();
             }
-            else {
+
+            if((valueX - Math.round(valueX)) !== 0 || (valueY - Math.round(valueY)) !== 0 || (valueSize - Math.round(valueSize)) !== 0) {
+              disableButton();
+            } else {
               activeButton();
             }
           }
