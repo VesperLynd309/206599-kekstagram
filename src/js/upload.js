@@ -205,6 +205,10 @@
             var sizeWidth = (Math.min(currentResizer._image.naturalWidth, currentResizer._image.naturalHeight) - Math.min(valueX, valueY));
             if (valueSize > sizeWidth || valueSize < 0) {
               disableButton();
+            }
+
+            if((valueX - Math.round(valueX)) !== 0 || (valueY - Math.round(valueY)) !== 0 || (valueSize - Math.round(valueSize)) !== 0) {
+              disableButton();
             } else {
               activeButton();
             }
@@ -384,21 +388,23 @@
     filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
   });
 
+  var resizeX = resizeForm.querySelector('#resize-x');
+  var resizeY = resizeForm.querySelector('#resize-y');
+  var resizeSide = resizeForm.querySelector('#resize-size');
+
   // Обновление currentResizer с новыми значениями в форме.
   var newPictureSize = document.querySelector('.upload-resize-controls');
   newPictureSize.addEventListener('change', function() {
-    currentResizer.setConstraint(resizeForm.querySelector('#resize-x').value,
-      resizeForm.querySelector('#resize-y').value,
-      resizeForm.querySelector('#resize-size').value);
+    currentResizer.setConstraint(Math.round(resizeX.value), Math.round(resizeY.value), Math.round(resizeSide.value));
   });
 
   // Добавление значений смещения в форму.
   window.addEventListener('resizerchange', function() {
     var constraint = currentResizer.getConstraint();
 
-    resizeForm.querySelector('#resize-x').value = constraint.x;
-    resizeForm.querySelector('#resize-y').value = constraint.y;
-    resizeForm.querySelector('#resize-size').value = constraint.side;
+    resizeX.value = constraint.x;
+    resizeY.value = constraint.y;
+    resizeSide.value = constraint.side;
   });
 
   cleanupResizer();
