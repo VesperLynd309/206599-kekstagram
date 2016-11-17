@@ -410,4 +410,3 @@
   cleanupResizer();
   updateBackground();
 })();
- 
