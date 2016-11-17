@@ -395,16 +395,16 @@
   // Обновление currentResizer с новыми значениями в форме.
   var newPictureSize = document.querySelector('.upload-resize-controls');
   newPictureSize.addEventListener('change', function() {
-    currentResizer.setConstraint(Math.round(resizeX.value), Math.round(resizeY.value), Math.round(resizeSide.value));
+    currentResizer.setConstraint(resizeX.value, resizeY.value, resizeSide.value);
   });
 
   // Добавление значений смещения в форму.
   window.addEventListener('resizerchange', function() {
     var constraint = currentResizer.getConstraint();
 
-    resizeX.value = constraint.x;
-    resizeY.value = constraint.y;
-    resizeSide.value = constraint.side;
+    resizeX.value = Math.round(constraint.x);
+    resizeY.value = Math.round(constraint.y);
+    resizeSide.value = Math.round(constraint.side);
   });
 
   cleanupResizer();
